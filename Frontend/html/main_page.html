@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reciepia</title>
+    <title>Recipia</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="bg-french-dark-blue w-full h-full grid font-sherif">
@@ -31,30 +31,19 @@
     <main class="md:justify-center w-full h-auto grid mt-4 rounded-xl gap-4">
         <form id="profiles" name="profiles" class="w-full h-full p-2 m-0">
             <div id="profiles" class="w-full h-auto flex-row gap-4 p-2 bg-french-white rounded-xl">
-                <h2 class=" font-serif">Profiles</h2>
+                <h2 class=" font-serif">Profiles Suggestions</h2>
                 <div id="profiles_hrefs" class="w-full h-auto md:gap-2 gap-8">
 
                 </div>
             </div>
         </form>
-        <div class="bg-french-white opacity-40 grid w-full h-auto rounded-xl ">
+        <div id="recipies" class="opacity-40 grid w-full h-auto rounded-xl gap-2 text-center">
             
         </div>
+        <div class="text-center w-full h-12">
+            <button id="btn" type="button" class="w-24 h-10 text-lg bg-french-red rounded-xl">More...</button>
+        </div>
     </main>
-    <script>
-        var profiles = document.getElementById("profiles_hrefs")
-
-        var profile="<button type=\"button\" class=\"md:w-32 md:h-32 w-2/12 h-2/12 rounded-full\"><a href=\"./profile.html\"><img src=\"../css/pictures/images.png\" alt=\"\" class=\"w-full h-full rounded-full bg-gray-500\"></a></button>"
-
-        if(screen.width >= 768){
-            for (var i = 0; i < 7; i++){
-                profiles.innerHTML += profile
-            }
-        } else {
-            for (var i = 0; i < 5; i++){
-                profiles.innerHTML += profile
-            }
-        }
-    </script>
+    <script src="../js/index.js"></script>
 </body>
 </html>
