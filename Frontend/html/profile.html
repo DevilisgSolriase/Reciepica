@@ -4,8 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipia</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
-    
+<body class="bg-french-dark-blue w-full h-full grid font-sherif">
+    <nav id="top" class="bg-french-red w-full h-16 shadow-lg rounded-b-md flex sticky">
+        <div id="title" class="hidden sm:block md:w-56 md:text-2xl sm:text-lg md:mt-1 h-full w-1/5 ml-8 p-1 text-center flex-0">
+            <h1 class="mt-2 text-french-white">
+                <a href="./main_page.html">Reciepia</a>
+            </h1>
+        </div>
+        <div id="search" class="h-full flex-grow text-center justify-center p-3 items-center">
+            <input type="text" name="Search" id="search_bar" placeholder="Search..." class="w-full md:w-3/4 p-2 rounded-2xl text-lg shadow-xl">
+        </div>
+        <div id="buttons" class=" flex mr-1 w-1/5 justify-end gap-1">
+            <div class="md:hidden w-full h-full p-2 items-center">
+                <svg class="hover:bg-red-500 active:bg-red-700 hover:rounded-2xl active:rounded-2xl" width="50px" height="50px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="#000000" fill-rule="evenodd" d="M19 4a1 1 0 01-1 1H2a1 1 0 010-2h16a1 1 0 011 1zm0 6a1 1 0 01-1 1H2a1 1 0 110-2h16a1 1 0 011 1zm-1 7a1 1 0 100-2H2a1 1 0 100 2h16z">
+                </path></g></svg>
+            </div>
+            <button id="Login" class="hidden md:block rounded-xl h-full w-full hover:bg-red-500 active:bg-red-700">
+                <a href="./login.html" class="text-xl text-french-white">
+                    Login
+                </a>
+            </button>
+        </div>
+    </nav>
+    <main class="w-full h-auto grid mt-4 rounded-xl gap-4">
+        <div class="md:w-2/3 w-full h-auto grid justify-self-center gap-4">
+            <div id="profile_header" class="w-full rounded-xl text-center items-center bg-french-white">
+                <img id="profile_img" src="../css/pictures/images.png" alt="" class="rounded-xl m-auto mt-2">
+                <br>
+                <h1 class="text-xl" id="username">Profile User name</h1>
+            </div>
+            <div id="profile_info" class="md:w-2/3 w-full h-auto p-6 bg-french-white rounded-xl text-center grid md:m-auto">
+                <h1 class="text-2xl">Bio</h1>
+                <br>
+                <p id="bio" class="text-xl p-4">
+                exttextetxtextetxtextexttextextetxetxte  
+                </p>
+            </div>
+            <div id="recipies" class="opacity-40 grid w-full h-auto rounded-xl gap-2 text-center">
+
+            </div>
+            <div class="text-center w-full h-12">
+                <button id="btn" type="button" class="w-24 h-10 text-lg bg-french-red rounded-xl">More...</button>
+            </div>
+        </div>
+    </main>
+    <script src="../js/profile_rec.js"></script>
 </body>
 </html>
