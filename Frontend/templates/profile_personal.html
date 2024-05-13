@@ -25,10 +25,22 @@
     </nav>
     <main class="w-full h-auto grid mt-4 rounded-xl gap-4">
         <div class="md:w-2/3 w-full h-auto grid justify-self-center gap-4">
-            <div id="profile_header" class="w-full rounded-xl text-center items-center bg-french-white">
+            <div id="profile_header" class="w-full h-auto rounded-xl text-center items-center bg-french-white">
                 <img id="profile_img" src="../css/pictures/images.png" alt="" class="rounded-xl m-auto mt-2">
                 <br>
                 <h1 class="text-xl" id="username">Profile User name</h1>
+                <button id="img_edit" type="button">Edit</button>
+                <div id="div_img_edit" class="w-full h-auto hidden">
+                    <div class="w-full h-auto">
+                        <label for="Username_change">Change Username</label>
+                        <input type="text" name="new_username" id="new_username" class="p-2 rounded-xl">
+                    </div>
+                    <div class="w-full h-auto ml-10">
+                        <label for="">Change Image</label>
+                        <input type="file" name="img_edit" id="img_edit" class="ml-2" accept="image/jpeg, image/png">
+                    </div>
+                    <button type="button" id="img_done">Done</button>
+                </div>
             </div>
             <div id="profile_info" class="md:w-2/3 w-full h-auto p-6 bg-french-white rounded-xl text-center grid md:m-auto gap-2">
                 <h1 class="text-2xl">Bio</h1>
@@ -36,10 +48,11 @@
                 <p id="bio" class="text-xl p-4">
                     Initial Bio
                 </p>
-                <button id="edit" type="button" class="w-24 h-10 rounded-xl bg-french-red text-lg">Edit</button>
+                <button id="edit" type="button" class="text-lg">Edit</button>
                 <div id="div_edit" class="w-full h-auto hidden">
-                    <input type="text" name="bio_edit" id="bio_edit" maxlength="500" class="p-2 h-32 w-full">
-                    <button id="done" type="button" class="w-24 h-10 rounded-xl bg-french-red text-lg mt-2">Done</button>
+                    <label for="bio_edit">Enter New Bio</label>
+                    <textarea type="text" name="bio_edit" id="bio_edit" maxlength="500" class="p-2 h-32 w-full rounded-xl text-wrap"></textarea>
+                    <button id="done" type="button" class="text-lg mt-2">Done</button>
                 </div>
             </div>
             <div id="recipies" class="opacity-40 grid w-full h-auto rounded-xl gap-2 text-center">
