@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>welcome to Reciepia</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="bg-french-dark-blue w-full h-full grid font-serif">
     <div id="top" class="bg-french-red w-full h-16 shadow-lg rounded-b-md flex">
         <div id="title" class="md:w-60 w-full md:text-2xl md:mt-1 h-full md:ml-8 p-1 text-center text-4xl flex-0">
             <h1 class="mt-2 text-french-white">
-                <a href="./main_page.html">Reciepia</a>
+                <a href="/home">Reciepia</a>
             </h1>
         </div>
         <div id="buttons" class="hidden md:block w-1/5 ml-auto gap-1">
             <div class="hidden md:block w-36 h-full">
                 <button id="Login" class="hidden md:block rounded-xl h-full w-full hover:bg-red-500 active:bg-red-700">
-                    <a href="./login.html" class="text-xl text-french-white">
+                    <a href="/Login" class="text-xl text-french-white">
                         Login   
                     </a>
                 </button>
@@ -27,40 +27,40 @@
         welcome to Reciepia where all reciepies are shared!
     </div>
     <main class="flex justify-center">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <div class="md:w-2/5 sm:w-4/5 md:h-auto sm:h-full bg-french-Very-light-blue bg-opacity-25 md:mt-20 mt-14 md:mb-20 mb-14 p-3 rounded-xl justify-center">
-            <form class="text-center">
+            <form class="text-center" method="POST" action="">
+                {{ form.hidden_tag() }}
                 <p class="md:text-3xl text-4xl text-center">
                     Welcome to Reciepia
                 </p>
                 <br>
-                <label for="First_Name" class="sm:text-3xl lg:text-xl hidden md:block md:mb-2">First Name :</label>
-                <input type="First_Name" name="" id="First_Name" class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl" placeholder="First Name">
-                <br>
-                <br>
-                <label for="Last_Name" class="hidden md:block text-xl mb-2">Last Name :</label>
-                <input type="Last_Name" id="Last_Name" class="w-11/12 md:h-8 h-14 rounded-xl p-2 text-2xl md:text-xl" placeholder="Last Name">
-                <br>
-                <br>
-                <label for="Age" class="hidden md:block text-xl mb-2">Age :</label>
-                <input type="date" id="Age" class="w-11/12 md:h-8 h-14 rounded-xl p-2 text-2xl md:text-xl" alt="Age">
+                {{ form.username.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
+                {{ form.username(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
                 <br>
                 <br>
                 <div class="border-b border-french-white w-9/12 m-auto"></div>
                 <br>
-                <label for="E-mail" class="hidden md:block text-xl mb-2">E-mail :</label>
-                <input type="text" id="E-mail" class="w-11/12 md:h-8 h-14 rounded-xl p-2 text-2xl md:text-xl" placeholder="Example@emial.com">
+                {{ form.email.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
+                {{ form.email(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
                 <br>
                 <br>
-                <label for="Password" class="hidden md:block text-xl mb-2">Password :</label>
-                <input type="text" id="Password" class="w-11/12 md:h-8 h-14 rounded-xl p-2 text-2xl md:text-xl" placeholder="Password">
+                {{ form.password.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
+                {{ form.password(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
                 <br>
                 <br>
-                <label for="Password" class="hidden md:block text-xl mb-2">Comfirm Password :</label>
-                <input type="text" id="Confirm_Password" class="w-11/12 md:h-8 h-14 rounded-xl p-2 text-2xl md:text-xl" placeholder="Confirm Password">
+                {{ form.confirm_password.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
+                {{ form.confirm_password(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
                 <br>
                 <br>
                 <div class="text-center">    
-                    <button type="submit" id="SignUp" class=" md:w-4/12 md:h-3/12 w-1/3 h-10 md:text-sm text-xl bg-french-red rounded-xl ml-auto">Sign Up</button>
+                    {{ form.submit(class=" md:w-4/12 md:h-3/12 w-1/3 h-10 md:text-sm text-xl bg-french-red rounded-xl ml-auto") }}
                 </div>
                 <br>
             </form>

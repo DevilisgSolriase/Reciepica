@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipia</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="bg-french-dark-blue w-full h-full grid font-serif">
     <div id="top" class="bg-french-red w-full h-16 shadow-lg rounded-b-md flex">
@@ -16,7 +16,7 @@
         <div id="buttons" class="hidden md:block w-1/5 ml-auto gap-1">
             <div class="hidden md:block w-36 h-full">
                 <button id="Login" class="hidden md:block rounded-xl h-full w-full hover:bg-red-500 active:bg-red-700">
-                    <a href="./registration.html" class="text-xl text-french-white">
+                    <a href="/Register" class="text-xl text-french-white">
                         Register
                     </a>
                 </button>
@@ -28,24 +28,24 @@
     </div>
     <main class="flex justify-center">
         <div class="md:w-1/5 sm:w-4/5 md:h-auto sm:h-full bg-french-Very-light-blue bg-opacity-25 md:mt-20 mt-14 p-3 rounded-xl justify-center">
-            <form>
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
                 <p class="md:text-3xl text-4xl text-center">
                     Welcome to Reciepia
                 </p>
                 <br>
-                <label for="email" class="sm:text-3xl lg:text-xl hidden md:block md:mb-2">E-mail :</label>
-                <input type="email" name="" id="email" class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl" placeholder="Example@email.com">
+                {{ form.email.label(class="sm:text-3xl lg:text-xl hidden md:block md:mb-2") }}
+                {{ form.email(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
                 <br>
                 <br>
-                <label for="password" class="hidden md:block text-xl mb-2">Password :</label>
-                <input type="password" id="password" class="w-10/12 md:h-8 
-                h-14 rounded-xl p-2 text-2xl md:text-xl" placeholder="Password">
+                {{ form.password.label(class="hidden md:block text-xl mb-2") }} 
+                {{ form.password(class="w-10/12 md:h-8 h-14 rounded-xl p-2 text-2xl md:text-xl") }}
                 <button type="button" class="active:text-french-white md:text-sm text-2xl" id="passwordButton" onclick="passwordToggle()">show</button>
                 <br>
                 <br>
                 <div class="text-center">    
-                    <button type="submit" class="md:w-4/12 md:h-3/12 w-1/3 h-10 md:text-sm text-xl bg-french-red rounded-xl ml-auto">Login</button>
-                    <button type="button" class="md:hidden md:w-4/12 md:h-3/12 w-1/3 h-10 md:text-sm text-xl bg-french-red rounded-xl ml-auto"><a href="./registration.html">Register</a></button>
+                    {{ form.submit(class="md:w-4/12 md:h-3/12 w-1/3 h-10 md:text-sm text-xl bg-french-red rounded-xl ml-auto") }}
+                    <button type="button" class="md:hidden md:w-4/12 md:h-3/12 w-1/3 h-10 md:text-sm text-xl bg-french-red rounded-xl ml-auto"><a href="/Register">Register</a></button>
                 </div>
                 <br>
                 <div class="border-b border-french-white w-9/12 m-auto"></div>

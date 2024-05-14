@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Recipia</title>
 </head>
 <body class="bg-french-dark-blue w-full h-full grid font-sherif">
     <nav id="top" class="bg-french-red w-full h-16 shadow-lg rounded-b-md flex sticky">
         <div id="title" class="hidden sm:block md:w-56 md:text-2xl sm:text-lg md:mt-1 h-full w-1/5 ml-8 p-1 text-center flex-0">
             <h1 class="mt-2 text-french-white">
-                <a href="./main_page.html">Reciepia</a>
+                <a href="/home">Reciepia</a>
             </h1>
         </div>
         <div id="search" class="h-full flex-grow text-center justify-center p-3 items-center">
@@ -22,7 +22,7 @@
                 </path></g></svg>
             </div>
             <button id="Login" class="hidden md:block rounded-xl h-full w-full hover:bg-red-500 active:bg-red-700">
-                <a href="./login.html" class="text-xl text-french-white">
+                <a href="/Login" class="text-xl text-french-white">
                     Login
                 </a>
             </button>
@@ -96,6 +96,6 @@
     <section class="w-full h-10 mt-auto">
         
     </section>
-    <script src="../js/more_recipes.js"></script>
+    <script src="{{ url_for('static', filename='js/more_recipes.js') }}"></script>
 </body>
 </html>

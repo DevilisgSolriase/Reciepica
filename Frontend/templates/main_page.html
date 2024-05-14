@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipia</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body class="bg-french-dark-blue w-full h-full grid font-sherif">
     <nav id="top" class="bg-french-red w-full h-16 shadow-lg rounded-b-md flex sticky">
@@ -22,7 +22,7 @@
                 </path></g></svg>
             </div>
             <button id="Login" class="hidden md:block rounded-xl h-full w-full hover:bg-red-500 active:bg-red-700">
-                <a href="./login.html" class="text-xl text-french-white">
+                <a href="/Login" class="text-xl text-french-white">
                     Login
                 </a>
             </button>
@@ -44,6 +44,6 @@
             <button id="btn" type="button" class="w-24 h-10 text-lg bg-french-red rounded-xl">More...</button>
         </div>
     </main>
-    <script src="../js/index.js"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </body>
 </html>
