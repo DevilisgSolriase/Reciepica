@@ -41,22 +41,60 @@
                     Welcome to Reciepia
                 </p>
                 <br>
-                {{ form.username.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
-                {{ form.username(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
+                {% if form.username.errors %}
+                    {% for error in form.username.errors %}
+                        <div class="w-full h-auto text-lg text-french-red">
+                            <span>{{ error }}</span>
+                        </div>
+                    {% endfor %}
+                    {{ form.username.label(class="sm:text-3xl lg:text-xl md:mb-2 text-french-red") }}
+                    {{ form.username(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl border-french-red border-2") }}                
+                {% else %}
+                    {{ form.username.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
+                    {{ form.username(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
+                {%endif%}
                 <br>
                 <br>
-                <div class="border-b border-french-white w-9/12 m-auto"></div>
+                {% if form.email.errors%}
+                    {% for error in form.email.errors %}
+                        <div class="w-full h-auto text-lg text-french-red">
+                            <span>{{ error }}</span>
+                        </div>
+                    {% endfor %}
+                    {{ form.email.label(class="sm:text-3xl lg:text-xl md:mb-2 text-french-red") }}
+                    {{ form.email(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl border-french-red border-2") }}                
+                {% else %}
+                    {{ form.email.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
+                    {{ form.email(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
+                {%endif%}
                 <br>
-                {{ form.email.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
-                {{ form.email(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
+                <br>
+                {% if form.password.errors%}
+                {% for error in form.password.errors %}
+                    <div class="w-full h-auto text-lg text-french-red">
+                        <span>{{ error }}</span>
+                    </div>
+                {% endfor %}
+                    {{ form.password.label(class="sm:text-3xl lg:text-xl md:mb-2 text-french-red") }}
+                    {{ form.password(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl border-french-red border-2") }}                
+                {% else %}
+                    {{ form.password.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
+                    {{ form.password(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
+                {%endif%}
                 <br>
                 <br>
-                {{ form.password.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
-                {{ form.password(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
-                <br>
-                <br>
-                {{ form.confirm_password.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
-                {{ form.confirm_password(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
+                {% if form.confirm_password.errors%}
+                {% for error in form.confirm_password.errors %}
+                    <div class="w-full h-auto text-lg text-french-red">
+                        <span>{{ error }}</span>
+                    </div>
+                {% endfor %}
+                {{ form.confirm_password.label(class="sm:text-3xl lg:text-xl md:mb-2 text-french-red") }}
+                {{ form.confirm_password(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl border-french-red border-2") }}                
+                {% else %}
+                    {{ form.confirm_password.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
+                    {{ form.confirm_password(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
+                {%endif%}
                 <br>
                 <br>
                 <div class="text-center">    

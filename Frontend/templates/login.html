@@ -10,7 +10,7 @@
     <div id="top" class="bg-french-red w-full h-16 shadow-lg rounded-b-md flex">
         <div id="title" class="md:w-60 w-full md:text-2xl md:mt-1 h-full md:ml-8 p-1 text-center text-4xl flex-0">
             <h1 class="mt-2 text-french-white">
-                <a href="./main_page.html">Reciepia</a>
+                <a href="/home">Reciepia</a>
             </h1>
         </div>
         <div id="buttons" class="hidden md:block w-1/5 ml-auto gap-1">
@@ -27,6 +27,17 @@
         welcome to Reciepia where all reciepies are shared!
     </div>
     <main class="flex justify-center">
+        {% with messages = get_flashed_messages(with_categories) %}
+            {% if messages %}    
+                {% for category, message in messages %}
+                    <div class="md:w-1/5 sm:w-4/5 md:h-auto sm:h-full bg-french-Very-light-blue bg-opacity-25 md:mt-20 mt-14 p-3 rounded-xl justify-center">
+                        <p class="text-green-400">
+                            {{ message }}
+                        </p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <div class="md:w-1/5 sm:w-4/5 md:h-auto sm:h-full bg-french-Very-light-blue bg-opacity-25 md:mt-20 mt-14 p-3 rounded-xl justify-center">
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
@@ -34,12 +45,32 @@
                     Welcome to Reciepia
                 </p>
                 <br>
-                {{ form.email.label(class="sm:text-3xl lg:text-xl hidden md:block md:mb-2") }}
-                {{ form.email(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
+                {% if form.email.errors%}
+                {% for error in form.email.errors %}
+                    <div class="w-full h-auto text-lg text-french-red">
+                        <span>{{ error }}</span>
+                    </div>
+                {% endfor %}
+                {{ form.email.label(class="sm:text-3xl lg:text-xl md:mb-2 text-french-red") }}
+                {{ form.email(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl border-french-red border-2") }}                
+                {% else %}
+                    {{ form.email.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
+                    {{ form.email(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
+                {%endif%}
                 <br>
                 <br>
-                {{ form.password.label(class="hidden md:block text-xl mb-2") }} 
-                {{ form.password(class="w-10/12 md:h-8 h-14 rounded-xl p-2 text-2xl md:text-xl") }}
+                {% if form.password.errors%}
+                {% for error in form.password.errors %}
+                    <div class="w-full h-auto text-lg text-french-red">
+                        <span>{{ error }}</span>
+                    </div>
+                {% endfor %}
+                    {{ form.password.label(class="sm:text-3xl lg:text-xl md:mb-2 text-french-red") }}
+                    {{ form.password(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl border-french-red border-2") }}                
+                {% else %}
+                    {{ form.password.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
+                    {{ form.password(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
+                {%endif%}
                 <button type="button" class="active:text-french-white md:text-sm text-2xl" id="passwordButton" onclick="passwordToggle()">show</button>
                 <br>
                 <br>

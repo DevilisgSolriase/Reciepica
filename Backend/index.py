@@ -12,14 +12,16 @@ def home():
 @app.route("/Login", methods=['GET', 'POST'])
 def Login():
     form = LoginForm()
+    if form.validate_on_submit():
+        flash(f'Account Created for {form.email.data}!', 'success')
+        return redirect(url_for('home'))
     return render_template('login.html', form = form)
 
 @app.route("/Register", methods=['GET', 'POST'])
 def Reg():
     form = RegistrationForm()
     if form.validate_on_submit():
-        flash(f'Account Created for {form.username.data}!', 'success')
-        return redirect(url_for('home'))
+        return redirect(url_for('Login'))
     return render_template('registration.html', form=form)
 
 @app.route("/Profile")
