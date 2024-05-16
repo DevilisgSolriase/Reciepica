@@ -10,35 +10,36 @@
     <div id="top" class="bg-french-red w-full h-16 shadow-lg rounded-b-md flex">
         <div id="title" class="md:w-60 w-full md:text-2xl md:mt-1 h-full md:ml-8 p-1 text-center text-4xl flex-0">
             <h1 class="mt-2 text-french-white">
-                <a href="/home">Reciepia</a>
+                <a href="{{ url_for('home') }}">Reciepia</a>
             </h1>
         </div>
         <div id="buttons" class="hidden md:block w-1/5 ml-auto gap-1">
             <div class="hidden md:block w-36 h-full">
-                <button id="Login" class="hidden md:block rounded-xl h-full w-full hover:bg-red-500 active:bg-red-700">
-                    <a href="/Register" class="text-xl text-french-white">
+                <button id="register" class="hidden md:block rounded-xl h-full w-full hover:bg-red-500 active:bg-red-700">
+                    <a href="{{ url_for('Reg') }}" class="text-xl text-french-white">
                         Register
                     </a>
                 </button>
             </div>
         </div>
     </div>
+    
     <div class="md:hidden w-full h-auto text-2xl text-center p-2 mt-6">
         welcome to Reciepia where all reciepies are shared!
     </div>
     <main class="flex justify-center">
-        {% with messages = get_flashed_messages(with_categories) %}
-            {% if messages %}    
-                {% for category, message in messages %}
-                    <div class="md:w-1/5 sm:w-4/5 md:h-auto sm:h-full bg-french-Very-light-blue bg-opacity-25 md:mt-20 mt-14 p-3 rounded-xl justify-center">
-                        <p class="text-green-400">
-                            {{ message }}
-                        </p>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        <div class="md:w-1/5 sm:w-4/5 md:h-auto sm:h-full bg-french-Very-light-blue bg-opacity-25 md:mt-20 mt-14 p-3 rounded-xl justify-center">
+        <div class=" md:h-auto sm:h-full bg-french-Very-light-blue bg-opacity-25 md:mt-20 mt-14 p-3 rounded-xl justify-center">
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}    
+                    {% for category, message in messages %}
+                        <div class="w-full md:h-16 sm:h-full mb-4 bg-french-Very-light-blue bg-opacity-25 p-3 rounded-xl text-center justify-center">
+                            <p class={%if category == 'success' %}" text-green-400 "{%else %} " text-red-600" {%endif%}>
+                                {{ message }}                     
+                            </p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
                 <p class="md:text-3xl text-4xl text-center">
@@ -89,7 +90,7 @@
                     </tr>
                 </table>
                 <div class="w-full text-center">
-                    <a class="text-md md:text-sm hover:text white" href="./forgotPassword.html">Forgot your password?</a>
+                    <a class="text-md md:text-sm hover:text white" href="{{ url_for('forg') }}">Forgot your password?</a>
                 </div>
             </form>
         </div>

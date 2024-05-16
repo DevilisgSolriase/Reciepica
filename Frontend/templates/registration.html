@@ -10,13 +10,13 @@
     <div id="top" class="bg-french-red w-full h-16 shadow-lg rounded-b-md flex">
         <div id="title" class="md:w-60 w-full md:text-2xl md:mt-1 h-full md:ml-8 p-1 text-center text-4xl flex-0">
             <h1 class="mt-2 text-french-white">
-                <a href="/home">Reciepia</a>
+                <a href="{{ url_for('home') }}">Reciepia</a>
             </h1>
         </div>
         <div id="buttons" class="hidden md:block w-1/5 ml-auto gap-1">
             <div class="hidden md:block w-36 h-full">
                 <button id="Login" class="hidden md:block rounded-xl h-full w-full hover:bg-red-500 active:bg-red-700">
-                    <a href="/Login" class="text-xl text-french-white">
+                    <a href="{{ url_for('Login') }}" class="text-xl text-french-white">
                         Login   
                     </a>
                 </button>
@@ -104,42 +104,5 @@
             </form>
         </div>
     </main>
-    <script>
-
-        var LastName = document.getElementById("Last_Name")
-        var FirstName = document.getElementById("First_Name")
-        var Pass =  document.getElementById("Password")
-        var SecPass = document.getElementById("Confirm_Password")
-        var Email =  document.getElementById("E-mail")
-
-        var ScreenWidth =screen.width
-
-        if(ScreenWidth > 768){
-            LastName.placeholder = ""
-            FirstName.placeholder = ""
-            pass.placeholder = ""
-            Email.placeholder = ""
-            secondPass.placeholder = ""
-        }
-
-            
-        var btn = document.getElementById("SignUp")
-
-        btn.addEventListener("click", PasswordCheck())
-
-        function PasswordCheck(){
-            var pass1 = document.getElementById("Password").value
-            var pass2 = document.getElementById("Confirm_Password").value
-
-            console.log(pass1 + pass2)
-
-            if(pass1 != pass2){
-                window.document.alert("Welp shit fucko yo password aint shittin buddy")
-            }
-
-        }
-
-
-    </script>
 </body>
 </html>
