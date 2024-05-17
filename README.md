@@ -8,4 +8,4 @@ Used extensions in the backend:-
     3-flask-sqlalchemy
     4-flask-wtf (wt forms)
     5-flask-bcrypt
-    
+    6-Pillow
