@@ -1,15 +1,8 @@
 //Bio Edit
 
-var btn = document.getElementById("edit")
 var bio = document.getElementById("bio")
-var done = document.getElementById("done")
 var input = document.getElementById("bio_edit")
-var div = document.getElementById("div_edit")
 
-btn.addEventListener('click',function(){
-    div.classList = "w-full h-full"
-    btn.classList = "hidden"
-})
 
 done.addEventListener('click', function(){
 
@@ -43,6 +36,7 @@ img_done.addEventListener('click', function(){
         var reader = new FileReader()
 
         reader.onload = function(){
+            
             img.src = event.target.result
         }
         reader.readAsDataURL(file)

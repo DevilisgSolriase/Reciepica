@@ -25,6 +25,15 @@ class Post(db.Model):
     image_post = db.Column(db.String(20), nullable=False, default='images.png')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # Changed 'user.id' to 'User.id'
     
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'content': self.content,
+            'image_post': self.image_post,
+            'user_id': self.user_id
+        }
+    
     def __repr__(self):
         return f"Post('{self.title}')"    
 

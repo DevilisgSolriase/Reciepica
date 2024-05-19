@@ -14,7 +14,13 @@
             </h1>
         </div>
         <div id="search" class="h-full flex-grow text-center justify-center p-3 items-center">
-            <input type="text" name="Search" id="search_bar" placeholder="Search..." class="w-full md:w-3/4 p-2 rounded-2xl text-lg shadow-xl">
+            <form method="POST" action="/search">
+                {{ search.hidden_tag() }}
+                <div class="bg-white flex w-4/5 h-auto rounded-xl p-1 shadow-xl">
+                    {{ search.title(class="w-full h-8 p-2 rounded-2xl text-lg border-white") }}                
+                    {{ search.submit() }}
+                </div>
+            </form>       
         </div>
         <div id="buttons" class=" flex mr-1 w-1/5 justify-end gap-1">
             <div class="md:hidden w-full h-full p-2 items-center">

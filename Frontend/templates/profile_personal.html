@@ -14,14 +14,15 @@
             </h1>
         </div>
         <div id="search" class="h-full flex-grow text-center justify-center p-3 items-center">
-            <input type="text" name="Search" id="search_bar" placeholder="Search..." class="w-full md:w-3/4 p-2 rounded-2xl text-lg shadow-xl">
+            <form method="POST" action="/search">
+                {{ search.hidden_tag() }}
+                <div class="bg-white flex w-4/5 h-auto rounded-xl p-1 shadow-xl">
+                    {{ search.title(class="w-full h-8 p-2 rounded-2xl text-lg border-white") }}                
+                    {{ search.submit() }}
+                </div>
+            </form>       
         </div>
-        <div id="buttons" class=" flex mr-1 w-1/5 justify-end gap-1">
-            <div class="md:hidden w-full h-full p-2 items-center">
-                <svg class="hover:bg-red-500 active:bg-red-700 hover:rounded-2xl active:rounded-2xl" width="50px" height="50px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="#000000" fill-rule="evenodd" d="M19 4a1 1 0 01-1 1H2a1 1 0 010-2h16a1 1 0 011 1zm0 6a1 1 0 01-1 1H2a1 1 0 110-2h16a1 1 0 011 1zm-1 7a1 1 0 100-2H2a1 1 0 100 2h16z">
-                </path></g></svg>
-            </div>
-        </div>
+        
         <div>
             <button id="Login" class="hidden md:block rounded-xl h-full w-full md:mr-12 hover:bg-red-500 p-2 active:bg-red-700">
                 <a href="{{ url_for('Logout') }}" class="text-xl text-french-white">
@@ -33,44 +34,149 @@
     <main class="w-full h-auto grid mt-4 rounded-xl gap-4">
         <div class="md:w-2/3 w-full h-auto grid justify-self-center gap-4">
             <div id="profile_header" class="w-full h-auto rounded-xl text-center items-center bg-french-white">
-                <img id="profile_img" src="../css/pictures/images.png" alt="" class="rounded-xl m-auto mt-2">
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                    {% if messages %}    
+                        {% for category, message in messages %}
+                            <div class="w-full md:h-16 sm:h-full mb-4 bg-french-Very-light-blue bg-opacity-25 p-3 rounded-xl text-center justify-center">
+                                <p class={%if category == 'success' %}" text-green-600 "{%else %} " text-red-600" {%endif%}>
+                                    {{ message }}                     
+                                </p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <img id="profile_img" src={{ url_for('static', filename='imgs/'+current_user.image_file) }} alt="" class="rounded-xl m-auto mt-2 w-40 h-32">
                 <br>
                 <h1 class="text-xl" id="username">{{ current_user.username }}</h1>
-                <button id="img_edit" type="button">Edit</button>
-                <div id="div_img_edit" class="w-full h-auto hidden">
+                <button id="UserInfo_edit" type="button">Edit</button>
+                <div id="UserInfo_div" class="w-full h-full hidden">
                     <div class="w-full h-auto">
-                        <label for="Username_change">Change Username</label>
-                        <input type="text" name="new_username" id="new_username" class="p-2 rounded-xl">
+                        <form method="POST" action="" enctype="multipart/form-data">
+                            {{ form.hidden_tag() }}
+                            {% if form.username.errors %}
+                                {% for error in form.username.errors %}
+                                    <div class="w-full h-auto text-lg text-french-red">
+                                        <span>{{ error }}</span>
+                                    </div>s
+                                {% endfor %}
+                                {{ form.username.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
+                                {{ form.username(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl border-french-red border-2") }}                
+                            {% else %}
+                                {{ form.username.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
+                                {{ form.username(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
+                            {%endif%}
+                            <br>
+                            <br>
+                            {% if form.email.errors%}
+                                {% for error in form.email.errors %}
+                                    <div class="w-full h-auto text-lg text-french-red">
+                                        <span>{{ error }}</span>
+                                    </div>
+                                {% endfor %}
+                                {{ form.email.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
+                                {{ form.email(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl border-french-red border-2") }}                
+                            {% else %}
+                                {{ form.email.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
+                                <br>
+                                {{ form.email(class="w-11/12 md:h-8 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
+                            {%endif%}
+                            <br>
+                            <br>
+                            <div class="w-full h-auto grid px-10">
+                                {% if form.img.errors %}
+                                    {% for error in form.img.errors %}
+                                        <span class="text-red-800"> {{ error }} </span>
+                                        <br>
+                                    {% endfor %}
+                                {%endif%}
+                                {{ form.img.label(class="sm:text-3xl lg:text-xl md:mb-2") }}
+                                {{ form.img(class="w-full md:h-12 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
+                            </div>
+                            <br>
+                            <div class="text-center">    
+                                {{ form.submit(class=" md:w-4/12 md:h-3/12 w-1/3 h-10 md:text-sm text-xl bg-french-red rounded-xl ml-auto") }}
+                            </div>
+                        </form>
                     </div>
-                    <div class="w-full h-auto ml-10">
-                        <label for="">Change Image</label>
-                        <input type="file" name="img_edit" id="img_edit" class="ml-2" accept="image/jpeg, image/png">
-                    </div>
-                    <button type="button" id="img_done">Done</button>
+                    <br>
+                    <button type="button" id="UserInfo_done">Done</button>
                 </div>
             </div>
-            <div id="profile_info" class="md:w-2/3 w-full h-auto p-6 bg-french-white rounded-xl text-center grid md:m-auto gap-2">
+            <div id="BioInfo" class="md:w-2/3 w-full h-auto p-6 bg-french-white rounded-xl text-center grid md:m-auto gap-2">
                 <h1 class="text-2xl">Bio</h1>
                 <br>
                 <p id="bio" class="text-xl p-4">
                     {{ current_user.bio }}
                 </p>
-                <button id="edit" type="button" class="text-lg">Edit</button>
-                <div id="div_edit" class="w-full h-auto hidden">
+                <button id="BioInfo_edit" type="button" class="text-lg">Edit</button>
+                <div id="BioInfo_div" class="w-full h-auto hidden">
                     <label for="bio_edit">Enter New Bio</label>
-                    <textarea type="text" name="bio_edit" id="bio_edit" maxlength="500" class="p-2 h-32 w-full rounded-xl text-wrap"></textarea>
-                    <button id="done" type="button" class="text-lg mt-2">Done</button>
+                    <form method="POST">
+                        {{ bio_update.hidden_tag() }}
+                        {{ bio_update.bio(class="w-11/12 md:h-36 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
+                        {{ bio_update.submit(class=" md:w-4/12 md:h-3/12 w-1/3 h-10 md:text-sm text-xl bg-french-red rounded-xl ml-auto") }}
+                    </form>
                 </div>
             </div>
             <div id="recipies" class="opacity-40 grid w-full h-auto rounded-xl gap-2 text-center">
-
+                {% for post in posts %}
+                    <button class="w-full h-full">
+                        <a href={{url_for('rec')}}>
+                            <div class="w-full md:h-48 h-40 p-2 bg-french-white rounded-xl flex ">
+                                <img class="md:w-52 w-1/3 md:h-full h-36 rounded-xl" src={{ url_for('static', filename='imgs/'+post.image_post) }}>
+                                <table class="w-full">
+                                    <tr class="h-1/5 w-full p-5">
+                                        <td class="text-xl font-serif">
+                                            <h1>{{ post.title }}</h1>
+                                        </td>
+                                    </tr>
+                                    <tr class="h-4/5 w-full">
+                                        <td class="text-lg font-serif p-5 break-words">
+                                            {{  post.content  }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </a>
+                    </button>
+                {% endfor %}
             </div>
             <div class="text-center w-full h-12">
-                <button id="btn" type="button" class="w-24 h-10 text-lg bg-french-red rounded-xl">More...</button>
+                <button id="btn" type="button" class="w-24 h-10 text-lg bg-french-red rounded-xl"><a href={{url_for('new_post')}}>New post</a></button>
             </div>
         </div>
     </main>
-    <script src="../js/profile_rec.js"></script>
-    <script src="../js/personal_file.js"></script>
+    <script>
+
+        var btn = document.getElementById("UserInfo_edit")
+        var div = document.getElementById("UserInfo_div")
+        var done = document.getElementById("UserInfo_done")
+
+        btn.addEventListener('click',function(){
+            div.classList.remove("hidden")
+            btn.classList.add("hidden")
+        })        
+
+        done.addEventListener('click',function(){
+            div.classList.add("hidden")
+            btn.classList.remove("hidden")
+        })
+
+        var Bio_edit = document.getElementById("BioInfo_edit")
+        var Bio_div = document.getElementById("BioInfo_div")
+        var Bio_done = document.getElementById("BioInfo_done")
+
+        Bio_edit.addEventListener('click', function(){
+            Bio_div.classList.remove("hidden")
+            Bio_edit.classList.add("hidden")
+        })
+
+        Bio_done.addEventListener('click', function(){
+            Bio_div.classList.add("hidden")
+            Bio_edit.classList.remove("hidden")
+        })
+
+
+    </script>
 </body>
 </html>
