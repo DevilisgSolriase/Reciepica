@@ -108,9 +108,7 @@ def update_post(post_id):
     else:
         form = UpdatePostForm()
         if form.validate_on_submit():
-            print("test if the if statment for the img works")
             if form.img.data:
-                print("test if the if statment for the img works")
                 img_file = save_img(form.img.data)
                 post.image_post = img_file
             else:
@@ -118,7 +116,7 @@ def update_post(post_id):
             post.title = form.title.data
             post.content = form.content.data
             db.session.commit()
-            flash("Your post has been updated!")
+            flash("Your post has been updated!", 'success')
             return redirect(url_for('Prof_per'))
         elif request.method == 'GET':
             form.title.data = post.title
@@ -141,7 +139,7 @@ def Prof_per():
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
-        flash(f'Your account data has been updated!')
+        flash(f'Your account data has been updated!', 'success')
         return redirect(url_for('Prof_per'))
     elif request.method == 'GET':
         form.username.data = current_user.username
