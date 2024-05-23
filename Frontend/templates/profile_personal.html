@@ -97,9 +97,10 @@
                                 {{ form.submit(class=" md:w-4/12 md:h-3/12 w-1/3 h-10 md:text-sm text-xl bg-french-red rounded-xl ml-auto") }}
                             </div>
                         </form>
+                        
                     </div>
                     <br>
-                    <button type="button" id="UserInfo_done">Done</button>
+                    <button type="button" id="UserInfo_done">Cancel</button>
                 </div>
             </div>
             <div id="BioInfo" class="md:w-2/3 w-full h-auto p-6 bg-french-white rounded-xl text-center grid md:m-auto gap-2">
@@ -116,12 +117,17 @@
                         {{ bio_update.bio(class="w-11/12 md:h-36 h-14 rounded-xl p-2 md:text-xl text-2xl") }}
                         {{ bio_update.submit(class=" md:w-4/12 md:h-3/12 w-1/3 h-10 md:text-sm text-xl bg-french-red rounded-xl ml-auto") }}
                     </form>
+                    <br>
+                    <button type="button" id="BioInfo_done" >Cancel</button>
                 </div>
             </div>
-            <div id="recipies" class="opacity-40 grid w-full h-auto rounded-xl gap-2 text-center">
+            <div id="recipies" class="grid w-full h-auto rounded-xl gap-2 text-center pb-8">
                 {% for post in posts %}
-                    <button class="w-full h-full">
-                        <a href={{url_for('rec')}}>
+                    <form method="POST" action="{{ url_for('update_post', post_id=post.id) }}" enctype="multipart/form-data">
+                        <input type="hidden" name="title" value="{{ post.title }}">
+                        <input type="hidden" name="content" value="{{ post.content }}">
+                        <input type="hidden" name="image_post" value="{{ post.image_post }}">
+                        <button class="w-full h-52" type="submit">
                             <div class="w-full md:h-48 h-40 p-2 bg-french-white rounded-xl flex ">
                                 <img class="md:w-52 w-1/3 md:h-full h-36 rounded-xl" src={{ url_for('static', filename='imgs/'+post.image_post) }}>
                                 <table class="w-full">
@@ -129,16 +135,20 @@
                                         <td class="text-xl font-serif">
                                             <h1>{{ post.title }}</h1>
                                         </td>
-                                    </tr>
-                                    <tr class="h-4/5 w-full">
+                                     </tr>
+                                     <tr class="h-4/5 w-full">
                                         <td class="text-lg font-serif p-5 break-words">
                                             {{  post.content  }}
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                        </a>
-                    </button>
+                        </button>
+                    </form>
+                    <form method="POST" action="{{ url_for('Prof_per') }}">
+                        <input type="hidden" name="post_id" value="{{ post.id }}">
+                        <button type="submit" class="w-full h-auto rounded-xl bg-french-white hover:bg-french-red">Delete</button>
+                    </form>
                 {% endfor %}
             </div>
             <div class="text-center w-full h-12">
@@ -176,7 +186,33 @@
             Bio_edit.classList.remove("hidden")
         })
 
+        document.addEventListener('DOMContentLoaded', function() {
 
+            var editButtons = document.querySelectorAll('[id^="PostInfo_edit_"]');
+            var doneButtons = document.querySelectorAll('[id^="PostInfo_done_"]');
+            
+
+            editButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var postId = this.id.replace('PostInfo_edit_', '');
+                    var postDiv = document.getElementById('PostInfo_div_' + postId);
+                    var editButton = document.getElementById('PostInfo_edit_' + postId);
+                    postDiv.classList.remove('hidden');
+                    editButton.classList.add('hidden');
+                });
+            });
+        
+
+            doneButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var postId = this.id.replace('PostInfo_done_', '');
+                    var postDiv = document.getElementById('PostInfo_div_' + postId);
+                    var editButton = document.getElementById('PostInfo_edit_' + postId);
+                    postDiv.classList.add('hidden');
+                    editButton.classList.remove('hidden');
+                });
+            });
+        });
     </script>
 </body>
 </html>

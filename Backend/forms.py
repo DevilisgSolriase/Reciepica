@@ -59,4 +59,23 @@ class NewPostForm(FlaskForm):
 class Search(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     submit = SubmitField('Search')
+    
+class DataSend(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    content = TextAreaField('Content', validators=[DataRequired()])
+    image_post = FileField('Post Image', validators=[FileAllowed(['png', 'jpg'])])
+    
+class DataUser(FlaskForm):
+    username = StringField('username', validators=[DataRequired()])
+    bio = TextAreaField('bio', validators=[DataRequired()])
+    image_file = FileField('Post Image', validators=[FileAllowed(['png', 'jpg'])])
 
+class DeletePost(FlaskForm):
+    delete = SubmitField('Delete')    
+    
+class UpdatePostForm(FlaskForm):
+    title = StringField('title', validators=[DataRequired()])
+    content = TextAreaField('content', validators=[DataRequired()])
+    img = FileField('Update Profile Picture',   validators=[FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Update')
+    

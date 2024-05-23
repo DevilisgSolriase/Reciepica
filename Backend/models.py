@@ -23,7 +23,7 @@ class Post(db.Model):
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
     image_post = db.Column(db.String(20), nullable=False, default='images.png')
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # Changed 'user.id' to 'User.id'
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) 
     
     def to_dict(self):
         return {

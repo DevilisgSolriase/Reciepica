@@ -52,64 +52,79 @@
     <main class="md:justify-center w-full h-auto md:flex grid mt-4">
         <div class=" w-full lg:w-2/3 h-full md:p-2 md:m-2">
             <section class="w-full h-full rounded-xl bg-french-white shadow-2xl md:m-1 p-5 grid justify-center">
-                <table>
-                    <tr class="lg:block">
-                        <td>
-                            <div class="bg-black md:w-72 md:h-72 w-auto h-auto rounded-lg">
-                                <img class="w-full h-full rounded-lg" id="food_image" src="../css/pictures/images.png" alt="">
-                            </div>
-                        </td>
-                        <td class="flex-grow">
-                            <div class="md:w-2/3 md:h-72 w-auto h-auto grid-rows-1 p-3">
-                                <p class="text-xl">
-                                    words words words words words words  
-                                </p>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                <p id="receipe_details" class=" font-serif text-2xl opacity-100 text-black w-auto">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod justo ac dui ultrices, vitae efficitur odio tincidunt. In hac habitasse platea dictumst. Suspendisse potenti. Nulla facilisi. Duis sit amet semper sapien. Vivamus facilisis massa vitae dolor imperdiet, non malesuada turpis auctor. Sed vel euismod lacus, non varius nunc. Proin ac sodales libero. Curabitur venenatis orci vel odio laoreet, in mattis tortor commodo.
-
-                Praesent sagittis convallis nulla, at vulputate ipsum viverra et. Ut congue velit nec libero feugiat luctus. Integer facilisis sem sit amet quam facilisis, vitae imperdiet urna scelerisque. Nullam non nisi vitae elit fringilla finibus ut sit amet justo. Nam euismod mauris at mauris feugiat, vitae fermentum nisi tincidunt. Vestibulum nec tellus id ligula cursus volutpat. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus luctus sapien id scelerisque fermentum.
-
-                Quisque in leo eu dui dapibus volu pat. Aliquam ut sapien vel elit auctor interdum. Vivamus eget neque vitae lacus tincidunt dapibus. Integer at vestibulum nunc. Fusce vel justo at elit tincidunt ultrices id eu elit. Nunc ut orci vitae ligula laoreet laoreet. Etiam eget nisl vel erat bibendum semper. Ut vitae tellus eget orci posuere ullamcorper a vitae dui. Nullam eleifend eros a risus bibendum, nec consequat dolor varius. Duis faucibus rhoncus enim, id bibendum ex bibendum id. Suspendisse potenti. Fusce vehicula venenatis velit ut facilisis.
-
-                Aenean luctus leo nec posuere laoreet. Nulla facilisi. Phasellus vel augue eu elit cursus luctus. Integer eget nunc eu elit suscipit ullamcorper. Etiam fringilla, dui eu vulputate laoreet, elit orci elementum libero, id tincidunt purus turpis et augue. Vivamus tincidunt orci sed urna aliquet, nec tincidunt elit convallis. Integer ac mi eget ligula blandit bibendum. Suspendisse potenti. Sed id fringilla tortor, vel sodales tortor. Morbi ac odio vitae quam varius posuere sit amet ac sem. Nam efficitur mi nec vestibulum tincidunt.
-
-                </p>
-            
+                <form method="GET" action='/post'> 
+                    {{ form.hidden_tag() }}   
+                    <div class="bg-black md:w-82 md:h-72 w-auto h-auto rounded-lg ">
+                        <img id="pfp" src={{ url_for('static', filename='imgs/'+form.image_post) }} alt="" class="w-full h-full">
+                    </div>
+                    <div class="md:w-full text-center w-auto h-auto grid-rows-1 p-3">
+                        <p class="text-xl">
+                            {{ form.title }} 
+                        </p>
+                    </div>                
+                    <p id="receipe_details" class="w-full font-serif text-2xl opacity-100 text-black">
+                        {{ form.content }}
+                    </p>
+                </form>
             </section>
         </div>
         <div class="lg:w-1/3  h-full m-2 p-3">
             <div class="h-auto rounded-xl bg-french-Very-light-blue shadow-2xl m-1" width="%80">
                 <section class=" text-opacity-100 text-black text-2xl">
-                    <table>
-                        <tr class="hover:bg-french-very-dark-blue hover:text-white active:bg-frencg-light-blue">
-                            <td class="h-1/4 w-1/4 p-2 rounded-tl-xl">
-                                <div>
-                                    <img id="pfp" src="../css/pictures/images.png" alt="" class="rounded-full">
-                                </div>
-                            </td>
-                            <td class="h-1/4 w3/4 p-2 rounded-tr-xl">
-                                <div class="h-full flex-grow text-center">
-                                    <p id="pfname">Samle name</p>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="w-auto h-full p-4 ">
-                        <p id="pfbio">
-                            samle text to check the efficency of the bio ik the work efficeny was written wrong lol
-                        </p>
-                    </div>
+                    <form method='POST' action='/user'>
+                        <button class="w-full">
+                            <input type="hidden" name="username" value="{{ profile.author.username }}">
+                            <input type="hidden" name="bio" value="{{ profile.author.bio }}">
+                            <input type="hidden" name="image_file" value="{{ profile.author.image_file }}">
+                            <table>
+                                <tr class="hover:bg-french-very-dark-blue hover:text-white active:bg-frencg-light-blue">
+                                    <td class="h-1/4 w-1/4 p-2 rounded-tl-xl">
+                                        <div>
+                                            <img id="pfp" src={{ url_for('static', filename='imgs/'+profile.author.image_file) }} alt="" class="rounded-full">
+                                        </div>
+                                    </td>
+                                    <td class="h-1/4 w3/4 p-2 rounded-tr-xl">
+                                        <div class="h-full flex-grow text-center">
+                                                <p id="pfname">{{ profile.author.username }}</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="w-auto h-full p-4 ">
+                                <p id="pfbio">
+                                    {{ profile.author.bio }}
+                                </p>
+                            </div>
+                        </button>
+                    </form>
                 </section>
             </div> 
-            <div class="h-auto rounded-xl bg-french-Very-light-blue shadow-2xl m-1" width="%80">
+            <div class="h-auto rounded-x shadow-2xl m-1" width="%80">
                 <section class="h-full w-full">
-                    <table id="more_recipes" class="lg:h-full w-full h-auto">
-                        
-                    </table>
+                    {% for post in posts %}
+                        <form method="POST" action="/post">
+                            <input type="hidden" name="title" value="{{ post.title }}">
+                            <input type="hidden" name="content" value="{{ post.content }}">
+                            <input type="hidden" name="image_post" value="{{ post.image_post }}">
+                            <button class="w-full h-full mb-2" type="submit">
+                                <div class="w-full md:h-32 h-40 p-2 bg-french-white rounded-xl flex ">
+                                    <img class="md:w-28 w-1/3 md:h-full h-6 rounded-xl" src={{ url_for('static', filename='imgs/'+post.image_post) }}>
+                                    <table class="w-full">
+                                        <tr class="h-1/5 w-full p-5">
+                                            <td class="text-xl font-serif">
+                                                <h1>{{ post.title }}</h1>
+                                            </td>
+                                        </tr>
+                                        <tr class="h-4/5 w-full">
+                                            <td class="text-lg font-serif p-5 break-words">
+                                                {{  post.content  }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </button>
+                        </form>
+                    {% endfor %}    
                 </section>
             </div> 
         </div>
@@ -117,6 +132,5 @@
     <section class="w-full h-10 mt-auto">
         
     </section>
-    <script src="{{ url_for('static', filename='js/more_recipes.js') }}"></script>
 </body>
 </html>
